@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Outlook compose add-in (add-in only / XML manifest). https://bobfisher2008.github.io/mn-spellcheck-addin is replaced at build time.
+     Permission is ReadWriteItem: the current item only, never the mailbox. -->
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+           xsi:type="MailApp">
+  <Id>2f72c1f4-4c7e-4696-90b4-9af4c4767c68</Id>
+  <Version>0.1.0.0</Version>
+  <ProviderName>mn-spellcheck</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Mongolian Spellcheck">
+    <Override Locale="mn-MN" Value="Монгол үг шалгагч"/>
+  </DisplayName>
+  <Description DefaultValue="Mongolian (Cyrillic) spellchecking for e-mails you write. Runs locally; message text is never sent anywhere.">
+    <Override Locale="mn-MN" Value="Бичиж буй захидлын монгол үгийн алдааг шалгана. Бичвэрийг хаашаа ч илгээхгүй."/>
+  </Description>
+  <IconUrl DefaultValue="https://bobfisher2008.github.io/mn-spellcheck-addin/icons/icon64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://bobfisher2008.github.io/mn-spellcheck-addin/icons/icon128.png"/>
+  <SupportUrl DefaultValue="https://github.com/bataak/dict-mn"/>
+  <!-- No <AppDomains/>: Word desktop's parser rejects the empty element and drops the add-in (runtime log, 2026-11-06). -->
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.3"/>
+    </Sets>
+  </Requirements>
+  <FormSettings>
+    <Form xsi:type="ItemEdit">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://bobfisher2008.github.io/mn-spellcheck-addin/outlook/taskpane.html"/>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
+  </Rule>
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <FunctionFile resid="Commands.Url"/>
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="MnSpell.ComposeGroup">
+                <Label resid="Group.Label"/>
+                <Control xsi:type="Button" id="MnSpell.ComposeOpen">
+                  <Label resid="Button.Label"/>
+                  <Supertip>
+                    <Title resid="Button.Label"/>
+                    <Description resid="Button.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16"/>
+                    <bt:Image size="32" resid="Icon.32"/>
+                    <bt:Image size="80" resid="Icon.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16" DefaultValue="https://bobfisher2008.github.io/mn-spellcheck-addin/icons/icon16.png"/>
+        <bt:Image id="Icon.32" DefaultValue="https://bobfisher2008.github.io/mn-spellcheck-addin/icons/icon32.png"/>
+        <bt:Image id="Icon.80" DefaultValue="https://bobfisher2008.github.io/mn-spellcheck-addin/icons/icon80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://bobfisher2008.github.io/mn-spellcheck-addin/outlook/taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://bobfisher2008.github.io/mn-spellcheck-addin/commands.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="Group.Label" DefaultValue="Mongolian"/>
+        <bt:String id="Button.Label" DefaultValue="Check Mongolian"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="Button.Tooltip" DefaultValue="Check Mongolian (Cyrillic) spelling in this message. Runs locally."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

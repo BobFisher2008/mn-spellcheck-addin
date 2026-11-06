@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Монгол үг шалгагч</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+  <header>
+    <h1>Монгол үг шалгагч</h1>
+    <p id="status" role="status" aria-live="polite">…</p>
+  </header>
+  <section class="controls">
+    <button id="recheck" type="button">Дахин шалгах</button>
+    <p class="caps">Засах: үгийг мессеж дотроос сонгоод (хоёр товшоод) санал болгосон үгийг дарна.
+      <small>To fix: select the word in the message, then click a suggestion.</small></p>
+  </section>
+  <ul id="issues" class="issues"></ul>
+  <footer>
+    <small>Бүх шалгалт энэ компьютер дээр явагдана; захидлыг хаашаа ч илгээхгүй.
+      All checking runs locally in this pane.</small>
+  </footer>
+  <script type="module" src="taskpane.js"></script>
+</body>
+</html>

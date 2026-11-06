@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Монгол үг шалгагч</title>
+  <!-- Office.js must be loaded from Microsoft's CDN. It does not receive document text. -->
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+  <header>
+    <h1>Монгол үг шалгагч</h1>
+    <p id="status" role="status" aria-live="polite">…</p>
+  </header>
+  <section class="controls">
+    <button id="recheck" type="button">Дахин шалгах</button>
+    <label><input type="checkbox" id="live"> Бичих явцад шалгах <small>Re-check as you type (WordApi 1.6)</small></label>
+    <label><input type="checkbox" id="annotate"> Баримт дотор доогуур зураас <small>Squiggles in the document (Microsoft 365, WordApi 1.7)</small></label>
+    <p id="caps" class="caps"></p>
+  </section>
+  <ul id="issues" class="issues"></ul>
+  <footer>
+    <small>Бүх шалгалт энэ компьютер дээр явагдана; бичвэрийг хаашаа ч илгээхгүй.
+      All checking runs locally in this pane. dict-mn (MPL-2.0) · Hunspell.</small>
+  </footer>
+  <script type="module" src="taskpane.js"></script>
+</body>
+</html>
